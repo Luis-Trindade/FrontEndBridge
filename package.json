@@ -1,0 +1,24 @@
+{
+  "name": "frontpoc",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "activedirectory": "^0.7.2",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "jwt-simple": "^0.5.1",
+    "less-middleware": "~2.2.0",
+    "lodash": "^4.17.4",
+    "morgan": "~1.8.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.4.2"
+  }
+}
