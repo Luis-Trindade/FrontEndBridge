@@ -15,7 +15,7 @@ var apisimul = require('./routes/simul');
 var apigeneric = require('./routes/apigeneric');
 
 var app = express();
-
+app.set('port', process.env.PORT || 3002);
 
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
@@ -49,7 +49,7 @@ app.use('/logout',logout);
 app.use('/api/clientes', apiclientes);
 app.use('/api/contra', apicontra);
 app.use('/api/simul', apisimul);
-app.use('/api/',apigeneric);
+app.use('/api/', apigeneric);
 
 
 // catch 404 and forward to error handler

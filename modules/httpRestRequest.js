@@ -4,7 +4,13 @@ exports.getRestRequest = function(hostUrl, processResult){
     request({ method: 'GET', uri: hostUrl }, function(err, response, body) {
         // JSON body
         if(err) { console.log(err); processResult(true); return; }
-        var obj = JSON.parse(body);
+        try {
+            var obj = JSON.parse(body);
+        } catch (e) {
+            console.log(e.toString());
+            processResult(true);
+            return;
+        }
         processResult(false, obj);
     });
 }

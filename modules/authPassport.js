@@ -7,7 +7,7 @@ var Strategy = passportJWT.Strategy;
 
 var params = {
     secretOrKey: cfg.jwtSecret,
-    jwtFromRequest: ExtractJwt.fromUrlQueryParameter("auth")
+    jwtFromRequest: ExtractJwt.fromHeader("Authorization")
 };
 
 
