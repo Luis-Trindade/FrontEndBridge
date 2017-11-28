@@ -13,6 +13,7 @@ router.get('/short', function(req, res, next) {
 
     var queryParams='?';
 
+
     if ( req.query.start > 0 ) {
         queryParams = queryParams + 'start=' + req.query.start;
     }
@@ -48,6 +49,14 @@ router.get('/short', function(req, res, next) {
         }
         queryParams = queryParams + ordem;
     }
+    for (var key in req.query ) {
+        if( key != 'start' &&
+            key != 'length' &&
+            key != 'search' &&
+            key != 'order' ) {
+            queryParams = queryParams + '&' + key + '=' + req.query[key];
+        }
+    }
     restUrlContra = restUrlContra + queryParams;
     countFilteredUrlContra = countFilteredUrlContra + queryParams;
 
@@ -72,7 +81,7 @@ router.get('/short', function(req, res, next) {
         }
     ],
         function(err, results) {
-            if(err) { console.log(err); res.send(500,"Server Error"); return; }
+            if(err) { console.log(err); res.status(500).send("Server Error"); return; }
             var resposta = {
                 draw: req.query.draw,
                 recordsTotal: results[1],

@@ -12,6 +12,7 @@ var logout = require('./routes/logout');
 var apiclientes = require('./routes/apiclientes');
 var apicontra = require('./routes/apicontra');
 var apisimul = require('./routes/simul');
+var apisimulresc = require('./routes/simulresc');
 var apigeneric = require('./routes/apigeneric');
 
 var app = express();
@@ -49,6 +50,7 @@ app.use('/logout',logout);
 app.use('/api/clientes', apiclientes);
 app.use('/api/contra', apicontra);
 app.use('/api/simul', apisimul);
+app.use('/api/simulresc', apisimulresc);
 app.use('/api/', apigeneric);
 
 
