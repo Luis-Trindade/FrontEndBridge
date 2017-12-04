@@ -131,6 +131,18 @@ router.get('/count', function(req, res, next) {
 
 router.get('/mapas/:nomemapa', function(req, res, next){
     var restUrlMapas = 'http://' + cfg.lease_rest_host + ':'+ cfg.lease_rest_port + '/lease/api/mapas/' + req.params.nomemapa;
+    var queryParams='?';
+
+    for (var key in req.query ) {
+        if( key != 'start' &&
+            key != 'length' &&
+            key != 'search' &&
+            key != 'order' ) {
+            queryParams = queryParams + '&' + key + '=' + req.query[key];
+        }
+    }
+    restUrlMapas = restUrlMapas + queryParams;
+
     restRequest.getRestRequest(restUrlMapas, function (err, resultados) {
         if(err) { console.log(err); res.json(null); return; }
         res.json(resultados);
@@ -211,13 +223,14 @@ router.delete('/:numcliente', function(req, res, next) {
     console.log('Request Id:', req.params.numcliente);
     var restUrlClient = 'http://' + cfg.lease_rest_host + ':' + cfg.lease_rest_port + '/lease/api/client/' + req.params.numcliente;
 
-    restRequest.deleteRestRequest(restUrlClient, function (err) {
+    restRequest.deleteRestRequest(restUrlClient, function (err, body) {
         if (err) {
-            console.log(err);
-            res.sendStatus(406, "Server Error");
+            res.status(406).json( body );
+            //res.sendStatus(400, body);
             return;
         }
-        res.sendStatus(200, "OK");
+        res.status(200).json( "OK" );
+
         return;
     });
 });
